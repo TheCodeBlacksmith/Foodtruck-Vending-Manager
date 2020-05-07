@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GT Food Truck</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(0, 162, 255);
+        }
+
+        header {
+            background: rgb(0, 0, 0);
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+        }
+
+        section {
+            color: rgb(255, 255, 255);
+            padding: 20px;
+            margin: 0px;
+            font-size: 20px;
+            height: 100%;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0px;
+            width: 100%;
+            text-align: center;
+        }
+
+        li {
+            display: inline-block;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            letter-spacing: 4px;
+            margin-left: 30px;
+            margin-right: 30px;
+            text-underline-offset: 3px;
+            font-weight: bold;
+            background-color: coral;
+        }
+
+        a:link {
+            color: rgb(0, 0, 0);
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: rgb(0, 0, 0);
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: rgb(255, 255, 255);
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: rgb(255, 255, 255);
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 5px;
+        }
+
+        /* The popup form - hidden by default */
+        .form-popup {
+            display: block;
+            position: fixed;
+            border: 8px solid #f1f1f1;
+            z-index: 9;
+            padding: 5px;
+            background-color: rgb(0, 238, 255);
+        }
+
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 300px;
+            padding: 10px;
+         
+        }
+
+        /* Full-width input fields */
+        .form-container input[type=text],
+        .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+    </style>
+</head>
+
+<header>
+    <ul>
+        <p style="color: white; padding: 0px; font-weight: bold; text-align: center;">GT Food Truck</p>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a a href="about.html">About</a></li>
+        <li><a href="register.html">Register</a></li>
+    </ul>
+</header>
+
+<body>
+    <section>
+        <h3>Update Station:</h3>
+        <form method="POST" class="form-popup" id="myForm">
+            <label for="stationName">Name:</label><br>
+            <input type="text" id="stationName" name="stationName" value="{{ stationName }}" onchange='check();' disabled><br>
+            <input type="text" id="stationNameAccess" name="stationNameAccess" value="{{ stationName }}" onchange='check();' hidden> 
+            <label for="capacity">Capacity:</label><br>
+            <input type="number" id="capacity" name="capacity" min="1" value="{{ capacity }}" required></input><br>
+
+            <label for="sponsBuilding">Sponsored Building:</label><br>
+            <!-- <input type="text" list="tags" id="tag" name="tag" value=""> -->
+            <!-- <input list="sponsBuildings" name="sponsBuilding" id="sponsBuilding"> -->
+            <select id="sponsBuilding" name="sponsBuilding">
+                    <option value="{{ currSponsBuilding }}" selected>{{ currSponsBuilding }}</option>
+                {% for item in data %}
+                    <option value="{{item[0]}}">{{item[0]}}</option>
+                {% endfor %}
+            </select>
+            
+            <input type="submit" id="create" name="submit_button" value="Update Station">
+            <input type="submit" id="getBuildings" name="submit_button" value="Get Buildings" hidden>
+        </form>
+    </section>
+</body>
+<footer>Footer</footer>
+
+<script>
+    //gets the tag and description
+    var check = function() {
+        if(document.getElementById('stationName').value != ''){
+            document.getElementById('getBuildings').click();
+        }
+    }
+    </script>   
+</html>

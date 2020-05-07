@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GT Food Truck</title>
+    <style>
+
+
+        .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+        background-color: goldenrod;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow-x: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(255, 100, 80);
+        }
+
+        header {
+            background: rgb(0, 0, 0);
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+        }
+
+        section {
+            color: rgb(255, 255, 255);
+            padding: 20px;
+            margin: 0px;
+            font-size: 20px;
+            height: 100%;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0px;
+            width: 100%;
+            text-align: center;
+        }
+
+        li {
+            display: inline-block;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            letter-spacing: 4px;
+            margin-left: 30px;
+            margin-right: 30px;
+            text-underline-offset: 3px;
+            font-weight: bold;
+            background-color: coral;
+        }
+
+        a:link {
+            color: rgb(0, 0, 0);
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: rgb(0, 0, 0);
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: rgb(255, 255, 255);
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: rgb(255, 255, 255);
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+
+        footer {
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 5px;
+        }
+
+        tr {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        tr:hover {
+            background-color: rgb(3, 255, 116);
+        }
+
+        th {
+            background-color: rgb(255, 156, 8);
+            color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 10px;
+        }
+
+        td {
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<header>
+    <ul>
+        <p style="color: white; padding: 0px; font-weight: bold; text-align: center;">GT Food Truck</p>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a a href="about.html">About</a></li>
+        <li><a href="register.html">Register</a></li>
+    </ul>
+</header>
+
+<body>
+    <section style="background-color:rgb(255, 100, 80);">
+        <h3>Manage Food:</h3>
+        <form method="POST" class="form-popup" id="myForm">
+            <select id="foodName" name="foodName">
+                {% for item in foodNames %}
+                    <option value="{{item[0]}}">{{item[0]}}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" id="filter" name="submit_button" value="Filter">
+        
+        <br><br>
+
+        <table id="table" class="table-hover">
+            <tr>
+                <th>Name</th>
+                <th>Menu Count</th>
+                <th>Purchase Count</th>
+            </tr>
+            {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+
+        <labal> Chosen Row: </labal><input type="text" id="row" name="row" value="" size="3" disabled><br> <br>
+        
+        <input type="text" id="rowFoodName" name="rowFoodName" value="" hidden><br>
+        <input type="text" id="rowMenuCount" name="rowMenuCount" value="" hidden><br>
+        <input type="text" id="rowPurchaseCount" name="rowPurchaseCount" value="" hidden><br>
+
+        <br>
+        <input type="submit" id="deleteFood" name="submit_button" value="Delete Food">
+        <input type="submit" id="createFood" name="submit_button" value="Create Food">
+        <br>
+        </form style="padding-bottom:30px">
+
+    </section>
+</body>
+<script>
+    //get selected row
+
+    //display selected row data in text input
+
+    var table = document.getElementById("table"), rIndex;
+
+    for (var i = 1; i < table.rows.length; i++) {
+        table.rows[i].onclick = function () {
+            rIndex = this.rowIndex;
+            console.log(rIndex);
+
+            // get the selcted row's attributes
+            document.getElementById("rowFoodName").value = this.cells[0].innerHTML;
+            document.getElementById("rowMenuCount").value = this.cells[1].innerHTML;
+            document.getElementById("rowPurchaseCount").value = this.cells[2].innerHTML;
+            document.getElementById("row").value = rIndex;
+        };
+    }
+</script>
+
+</html>
