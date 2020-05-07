@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-4 offset-md-4">
+    <form action="{{ url_for('login') }}" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" id="username" required/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" id="password" required/>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit"/>
+        </div>
+    </form>
+    <a href="{{ url_for('register') }}">Register an account</a>
+</div>
+
+{% endblock %}
